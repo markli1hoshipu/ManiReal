@@ -1,0 +1,16 @@
+{
+    "contact_points": [
+        {
+            "id": [],
+            "description": "The handle of the spoon",
+            "usage": "Used for grasping the object."
+        }
+    ],
+    "functional_points": [
+        {
+            "id": 0,
+            "description": "The center of the spoon",
+            "usage": "Used to place the object at the target location."
+        }
+    ]
+}

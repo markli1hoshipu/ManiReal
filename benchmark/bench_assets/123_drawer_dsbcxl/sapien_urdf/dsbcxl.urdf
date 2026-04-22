@@ -1,0 +1,159 @@
+<?xml version="1.0" ?>
+<robot name="dsbcxl">
+  <!-- Shared dark gray metallic material definition for drawer -->
+  <material name="silver">
+    <!-- Medium dark gray -->
+    <color rgba="0.3 0.3 0.35 1.0"/>
+  </material>
+  <link name="base_link">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1"/>
+      <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="../blender_public/links/base_link.glb" scale="1 1 1"/>
+      </geometry>
+      <material name="silver"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 -0 0"/>
+      <geometry>
+        <!-- Shrink collision mesh by 0.3 to reduce contact between parts -->
+        <mesh filename="../blender_public/links/base_link.glb" scale="0.3 0.3 0.3"/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="link_1">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1"/>
+      <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/>
+    </inertial>
+    <visual>
+      <origin xyz="-0.10770083 0.16743082 6.2022564e-06" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="../blender_public/links/link_1.glb" scale="1 1 1"/>
+      </geometry>
+      <material name="silver"/>
+    </visual>
+    <collision>
+      <origin xyz="-0.10770083 0.16743082 6.2022564e-06" rpy="0 -0 0"/>
+      <geometry>
+        <!-- Shrink collision mesh by 0.3 to reduce contact between parts -->
+        <mesh filename="../blender_public/links/link_1.glb" scale="0.3 0.3 0.3"/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="link_2">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1"/>
+      <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/>
+    </inertial>
+    <visual>
+      <origin xyz="-0.10757461 -0.10378333 6.5743552e-06" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="../blender_public/links/link_2.glb" scale="1 1 1"/>
+      </geometry>
+      <material name="silver"/>
+    </visual>
+    <collision>
+      <origin xyz="-0.10757461 -0.10378333 6.5743552e-06" rpy="0 -0 0"/>
+      <geometry>
+        <!-- Shrink collision mesh by 0.3 to reduce contact between parts -->
+        <mesh filename="../blender_public/links/link_2.glb" scale="0.3 0.3 0.3"/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="meta__link_1_fillable_0_0_link">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1"/>
+      <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/>
+    </inertial>
+  </link>
+  <link name="meta__link_2_fillable_0_0_link">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1"/>
+      <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/>
+    </inertial>
+  </link>
+  <link name="__jointframe__link_1">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="0.0001"/>
+      <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/>
+    </inertial>
+  </link>
+  <joint name="j_link_1" type="prismatic">
+    <parent link="base_link"/>
+    <child link="__jointframe__link_1"/>
+    <origin xyz="0.10770083 -0.16743082 -6.2022564e-06" rpy="1.1920929e-07 -0 0"/>
+    <axis xyz="1 0 0"/>
+    <limit lower="0" upper="0.34432894" effort="1" velocity="1"/>
+    <dynamics damping="1" friction="0"/>
+  </joint>
+  <joint name="link_1__visual_frame_fix" type="fixed">
+    <parent link="__jointframe__link_1"/>
+    <child link="link_1"/>
+    <origin xyz="-0 -0 -0" rpy="-1.1920929e-07 -0 0"/>
+  </joint>
+  <link name="__jointframe__link_2">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="0.0001"/>
+      <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/>
+    </inertial>
+  </link>
+  <joint name="j_link_2" type="prismatic">
+    <parent link="base_link"/>
+    <child link="__jointframe__link_2"/>
+    <origin xyz="0.10757461 0.10378333 -6.5743552e-06" rpy="1.1920929e-07 -0 0"/>
+    <axis xyz="1 0 0"/>
+    <limit lower="0" upper="0.34432894" effort="1" velocity="1"/>
+    <dynamics damping="1" friction="0"/>
+  </joint>
+  <joint name="link_2__visual_frame_fix" type="fixed">
+    <parent link="__jointframe__link_2"/>
+    <child link="link_2"/>
+    <origin xyz="-0 -0 -0" rpy="-1.1920929e-07 -0 0"/>
+  </joint>
+  <link name="__jointframe__meta__link_1_fillable_0_0_link">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="0.0001"/>
+      <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/>
+    </inertial>
+  </link>
+  <joint name="meta__link_1_fillable_0_0_joint" type="fixed">
+    <parent link="link_1"/>
+    <child link="__jointframe__meta__link_1_fillable_0_0_link"/>
+    <origin xyz="0 0 0" rpy="1.1920929e-07 -0 0"/>
+  </joint>
+  <joint name="meta__link_1_fillable_0_0_link__visual_frame_fix" type="fixed">
+    <parent link="__jointframe__meta__link_1_fillable_0_0_link"/>
+    <child link="meta__link_1_fillable_0_0_link"/>
+    <origin xyz="-0 -0 -0" rpy="-1.1920929e-07 -0 0"/>
+  </joint>
+  <link name="__jointframe__meta__link_2_fillable_0_0_link">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="0.0001"/>
+      <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/>
+    </inertial>
+  </link>
+  <joint name="meta__link_2_fillable_0_0_joint" type="fixed">
+    <parent link="link_2"/>
+    <child link="__jointframe__meta__link_2_fillable_0_0_link"/>
+    <origin xyz="0 0 0" rpy="1.1920929e-07 -0 0"/>
+  </joint>
+  <joint name="meta__link_2_fillable_0_0_link__visual_frame_fix" type="fixed">
+    <parent link="__jointframe__meta__link_2_fillable_0_0_link"/>
+    <child link="meta__link_2_fillable_0_0_link"/>
+    <origin xyz="-0 -0 -0" rpy="-1.1920929e-07 -0 0"/>
+  </joint>
+</robot>

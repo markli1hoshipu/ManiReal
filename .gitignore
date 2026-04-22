@@ -1,0 +1,47 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.pytest_cache/
+.mypy_cache/
+
+# Virtual envs
+.venv/
+venv/
+env/
+
+# Data / outputs
+data/
+logs/
+eval_result/
+eval_video/
+models/
+**/checkpoints/
+**/weights/
+
+# Third-party pulled in at install time
+customized_robotwin/envs/curobo/
+customized_robotwin/assets/objects/
+customized_robotwin/assets/objects_bench/
+customized_robotwin/assets/background_texture/
+customized_robotwin/comparison_videos/
+customized_robotwin/customized_robotwin/
+
+# Large meshes fetched separately (see docs/install.md)
+customized_robotwin/assets/embodiments/aloha-agilex/urdf/aloha_maniskill_sim/meshes/box2_Link.dae
+
+# Editors
+.vscode/
+.idea/
+*.swp
+.DS_Store
+
+# Build artifacts
+build/
+dist/
+*.egg-info/
+
+# Misc
+*.zip

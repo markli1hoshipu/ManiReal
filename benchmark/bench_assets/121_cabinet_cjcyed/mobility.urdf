@@ -1,0 +1,85 @@
+<?xml version="1.0" ?>
+<robot name="cjcyed">
+  <link name="base_link">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1"/>
+      <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="../blender_public/links/base_link.glb" scale="1 1 1"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="../blender_public/links/base_link.glb" scale="1 1 1"/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="link_1">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1"/>
+      <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/>
+    </inertial>
+    <visual>
+      <origin xyz="-0.16687128 -0.001511558 0.14588808" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="../blender_public/links/link_1.glb" scale="1 1 1"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="-0.16687128 -0.001511558 0.14588808" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="../blender_public/links/link_1.glb" scale="1 1 1"/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="meta__base_link_fillable_0_0_link">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1"/>
+      <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/>
+    </inertial>
+  </link>
+  <link name="__jointframe__link_1">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="0.0001"/>
+      <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/>
+    </inertial>
+  </link>
+  <joint name="j_link_1" type="prismatic">
+    <parent link="base_link"/>
+    <child link="__jointframe__link_1"/>
+    <origin xyz="0.16687128 0.001511558 -0.14588808" rpy="-3.1415927 -1.5707962 0"/>
+    <axis xyz="1 0 0"/>
+    <limit lower="0" upper="0.27515632" effort="1" velocity="1"/>
+    <dynamics damping="1" friction="0"/>
+  </joint>
+  <joint name="link_1__visual_frame_fix" type="fixed">
+    <parent link="__jointframe__link_1"/>
+    <child link="link_1"/>
+    <origin xyz="0 0 0" rpy="3.1415927 -1.5707962 0"/>
+  </joint>
+  <link name="__jointframe__meta__base_link_fillable_0_0_link">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="0.0001"/>
+      <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/>
+    </inertial>
+  </link>
+  <joint name="meta__base_link_fillable_0_0_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="__jointframe__meta__base_link_fillable_0_0_link"/>
+    <origin xyz="0 0 0" rpy="1.1920929e-07 -0 0"/>
+  </joint>
+  <joint name="meta__base_link_fillable_0_0_link__visual_frame_fix" type="fixed">
+    <parent link="__jointframe__meta__base_link_fillable_0_0_link"/>
+    <child link="meta__base_link_fillable_0_0_link"/>
+    <origin xyz="-0 -0 -0" rpy="-1.1920929e-07 -0 0"/>
+  </joint>
+</robot>

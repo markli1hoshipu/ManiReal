@@ -1,0 +1,16 @@
+{
+    "contact_points": [
+        {
+            "id": [],
+            "description": "The rim of the dish rack",
+            "usage": "Used for grasping."
+        }
+    ],
+    "functional_points": [
+        {
+            "id": 0,
+            "description": "Center of dish rack",
+            "usage": "Placement target."
+        }
+    ]
+}

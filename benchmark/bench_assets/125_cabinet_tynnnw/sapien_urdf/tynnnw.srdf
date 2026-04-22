@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot name="tynnnw">
+    <disable_collisions link1="base_link" link2="leftdoor" reason="Adjacent" />
+    <disable_collisions link1="base_link" link2="rightdoor" reason="Adjacent" />
+
+    <disable_collisions link1="leftdoor" link2="rightdoor" reason="Default" />
+
+    <disable_collisions link1="base_link" link2="__jointframe__leftdoor" reason="Adjacent" />
+    <disable_collisions link1="base_link" link2="__jointframe__rightdoor" reason="Adjacent" />
+    <disable_collisions link1="__jointframe__leftdoor" link2="leftdoor" reason="Adjacent" />
+    <disable_collisions link1="__jointframe__rightdoor" link2="rightdoor" reason="Adjacent" />
+
+    <disable_collisions link1="base_link" link2="meta__base_link_fillable_0_0_link" reason="Adjacent" />
+    <disable_collisions link1="base_link" link2="__jointframe__meta__base_link_fillable_0_0_link" reason="Adjacent" />
+    <disable_collisions link1="__jointframe__meta__base_link_fillable_0_0_link" link2="meta__base_link_fillable_0_0_link" reason="Adjacent" />
+
+    <disable_collisions link1="leftdoor" link2="meta__base_link_fillable_0_0_link" reason="Never" />
+    <disable_collisions link1="rightdoor" link2="meta__base_link_fillable_0_0_link" reason="Never" />
+</robot>

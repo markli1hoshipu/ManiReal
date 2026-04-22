@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ManiReal — Install</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<header class="hero" style="padding: 3rem 0 1.5rem;">
+  <div class="container">
+    <h1 style="font-size: 2.2rem;">Install</h1>
+    <p class="tagline">Setup steps for the ManiReal benchmark.</p>
+    <div class="links">
+      <a class="btn" href="index.html">Home</a>
+      <a class="btn" href="https://github.com/markli1hoshipu/ManiReal">Code</a>
+    </div>
+  </div>
+</header>
+<main class="container">
+
+  <section>
+    <h2>1. Clone</h2>
+<pre><code>git clone https://github.com/markli1hoshipu/ManiReal.git
+cd ManiReal</code></pre>
+  </section>
+
+  <section>
+    <h2>2. RoboTwin base install</h2>
+    <p>Follow the upstream RoboTwin install guide for the conda environment, CuRobo, and SAPIEN:
+      <a href="https://robotwin-platform.github.io/doc/usage/robotwin-install.html">robotwin-platform.github.io/doc/usage/robotwin-install.html</a>.</p>
+    <p>Use the <code>RoboTwin</code> conda environment for all ManiReal commands.</p>
+  </section>
+
+  <section>
+    <h2>3. Assets overlay</h2>
+<pre><code>cp -r benchmark/bench_assets/* customized_robotwin/assets/objects_bench/
+cp benchmark/bench_assets/embodiments/aloha-agilex/*.yml \
+   customized_robotwin/assets/embodiments/aloha-agilex/</code></pre>
+    <p>Edit <code>customized_robotwin/assets/embodiments/aloha-agilex/curobo_left.yml</code>
+       and <code>curobo_right.yml</code> to point at your local URDF paths.</p>
+  </section>
+
+  <section>
+    <h2>4. Large mesh</h2>
+    <p>
+      The file <code>aloha-agilex/urdf/aloha_maniskill_sim/meshes/box2_Link.dae</code> (~206 MB) is
+      not tracked in this repository. Fetch it from the upstream Aloha-Agilex release:
+    </p>
+    <pre><code># Place the file at:
+#   customized_robotwin/assets/embodiments/aloha-agilex/urdf/aloha_maniskill_sim/meshes/box2_Link.dae</code></pre>
+  </section>
+
+  <section>
+    <h2>5. CuRobo cache patch</h2>
+    <p>In <code>customized_robotwin/envs/curobo/src/curobo/geom/sdf/world_mesh.py</code>,
+       replace the <code>clear_cache</code> method with:</p>
+<pre><code>def clear_cache(self):
+    self._wp_mesh_cache = {}
+    if self._mesh_tensor_list is not None:
+        self._mesh_tensor_list[2][:] = 0
+    if self._env_n_mesh is not None:
+        self._env_n_mesh[:] = 0
+    if self._env_mesh_names is not None:
+        for i in range(self.n_envs):
+            for j in range(len(self._env_mesh_names)):
+                self._env_mesh_names[i][j] = None
+    super().clear_cache()</code></pre>
+  </section>
+
+  <section>
+    <h2>6. Verify</h2>
+<pre><code>cd customized_robotwin
+source set_env.sh
+export ROBOTWIN_BENCH_TASK="bench"
+python script/bench_script/visualize_task_scene.py put_mouse_on_pad bench_demo_office_clean --rollout --seed 0</code></pre>
+  </section>
+
+</main>
+<footer>
+  <div class="container">
+    <p><a href="index.html">← Back to overview</a></p>
+  </div>
+</footer>
+</body>
+</html>

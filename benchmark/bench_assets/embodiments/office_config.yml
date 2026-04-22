@@ -1,0 +1,74 @@
+# additional cameras that are independent of the robot embodiment
+static_camera_list: 
+# - name: shelf_camera # for shelf viewing
+#   type: D435
+#   position:
+#   - -0.1
+#   - -0.85
+#   - 2
+#   forward:
+#   - 1
+#   - 0.7
+#   - -1.1
+#   left:
+#   - -0.7
+#   - 1
+#   - 0
+# - name: demo_camera
+#   type: D435
+#   position:
+#   - 0.1
+#   - 1.5
+#   - 2
+#   forward:
+#   - 0
+#   - -1
+#   - -0.6
+#   left:
+#   - 1
+#   - 0
+#   - 0
+- name: countertop_camera  # elevated overhead, tilted slightly forward
+  type: D435
+  position:
+    - -0.0
+    - -0.50
+    - 2.0
+  forward:
+    - 0
+    - 0.45
+    - -1.0
+  left:
+    - -1
+    - 0
+    - 0
+
+- name: demo_camera  # elevated right-front view, full table visible
+  type: D435
+  position:
+    - 1.65
+    - -0.78
+    - 1.62
+  forward:
+    - -0.98
+    - 0.40
+    - -0.36
+  left:
+    - -0.55
+    - -0.75
+    - 0
+
+- name: demo_camera_2  # elevated left-front mirrored view
+  type: D435
+  position:
+    - -1.65
+    - -0.78
+    - 1.62
+  forward:
+    - 0.98
+    - 0.40
+    - -0.36
+  left:
+    - -0.55
+    - 0.75
+    - 0

@@ -1,0 +1,69 @@
+{
+  "scale": [
+    1.0,
+    1.0,
+    1.0
+  ],
+  "transform_matrix": [
+    [
+      1.0,
+      0.0,
+      0.0,
+      0.045038285523272596
+    ],
+    [
+      0.0,
+      1.0,
+      0.0,
+      0.0075701927874136385
+    ],
+    [
+      0.0,
+      0.0,
+      1.0,
+      -0.0003273630267818013
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "init_qpos": [
+    0.0
+  ],
+  "target_points": [],
+  "contact_points": [],
+  "functional_points": [],
+  "orientation_point": [],
+  "contact_points_group": [],
+  "contact_points_mask": [],
+  "target_points_discription": [],
+  "contact_points_discription": [],
+  "functional_points_discription": [],
+  "orientation_point_discription": [],
+  "extents": [
+    0.31723469543457034,
+    0.684371337890625,
+    0.6843713684082031
+  ],
+  "openable_joint_ids": [
+    [
+      1,
+      "j_link_1"
+    ]
+  ],
+  "openable_joint_names": [
+    "j_link_1"
+  ],
+  "link_names": [
+    "base_link",
+    "link_1"
+  ],
+  "source": {
+    "category": "bottom_cabinet",
+    "model": "cjcyed",
+    "metadata_path": "/home/aaron/BEHAVIOR-1K/datasets/behavior-1k-assets/objects/bottom_cabinet/cjcyed/misc/metadata.json"
+  }
+}

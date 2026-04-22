@@ -1,0 +1,16 @@
+# additional cameras for Kitchen S environment
+static_camera_list:
+- name: countertop_camera  # elevated overhead, looking down at full table
+  type: D435
+  position:
+  - 0.0
+  - -0.3
+  - 2.2
+  forward:
+  - 0
+  - 0.25
+  - -1.0
+  left:
+  - -1
+  - 0
+  - 0

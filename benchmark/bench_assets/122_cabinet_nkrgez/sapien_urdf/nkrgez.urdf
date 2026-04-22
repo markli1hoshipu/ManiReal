@@ -1,0 +1,163 @@
+<?xml version="1.0" ?>
+<robot name="nkrgez">
+  <link name="base_link">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="5.0"/> <inertia ixx="0.1" ixy="0" ixz="0" iyy="0.1" iyz="0" izz="0.1"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="../blender_public/links/base_link.glb" scale="1 1 1"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="../blender_public/links/base_link.glb" scale="1 1 1"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="link_0">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1.0"/>
+      <inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01"/>
+    </inertial>
+    <visual>
+      <origin xyz="-0.1022089 -0.060188342 0.57656741" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="../blender_public/links/link_0.glb" scale="1 1 1"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="-0.1022089 -0.060188342 0.57656741" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="../blender_public/links/link_0.glb" scale="1 1 1"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="link_1">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1.0"/>
+      <inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01"/>
+    </inertial>
+    <visual>
+      <origin xyz="-0.10135159 -0.060185008 -0.57737958" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="../blender_public/links/link_1.glb" scale="1 1 1"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="-0.10135159 -0.060185008 -0.57737958" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="../blender_public/links/link_1.glb" scale="1 1 1"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="meta__base_link_fillable_0_0_link">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="0.1"/>
+      <inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001"/>
+    </inertial>
+  </link>
+
+  <link name="meta__base_link_openfillable_0_0_link">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="0.1"/>
+      <inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001"/>
+    </inertial>
+  </link>
+
+  <link name="__jointframe__link_0">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="0.01"/>
+      <inertia ixx="1e-4" ixy="0" ixz="0" iyy="1e-4" iyz="0" izz="1e-4"/>
+    </inertial>
+  </link>
+
+  <joint name="j_link_0" type="revolute">
+    <parent link="base_link"/>
+    <child link="__jointframe__link_0"/>
+    <origin xyz="0.1022089 0.060188342 -0.57656741" rpy="1.5277805e-05 1.4801144e-05 1.5946574"/>
+    <axis xyz="1 0 0"/>
+    <limit lower="0" upper="1.5707947" effort="10" velocity="1"/>
+    <dynamics damping="1.5" friction="0.5"/>
+  </joint>
+
+  <joint name="link_0__visual_frame_fix" type="fixed">
+    <parent link="__jointframe__link_0"/>
+    <child link="link_0"/>
+    <origin xyz="0 0 0" rpy="1.516144e-05 -1.4920318e-05 -1.5946574"/>
+  </joint>
+
+  <link name="__jointframe__link_1">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="0.01"/>
+      <inertia ixx="1e-4" ixy="0" ixz="0" iyy="1e-4" iyz="0" izz="1e-4"/>
+    </inertial>
+  </link>
+
+  <joint name="j_link_1" type="revolute">
+    <parent link="base_link"/>
+    <child link="__jointframe__link_1"/>
+    <origin xyz="0.10135159 0.060185008 0.57737958" rpy="1.4610361e-05 -1.4841121e-05 -1.5469351"/>
+    <axis xyz="1 0 0"/>
+    <limit lower="0" upper="1.5707954" effort="10" velocity="1"/>
+    <dynamics damping="1.5" friction="0.5"/>
+  </joint>
+
+  <joint name="link_1__visual_frame_fix" type="fixed">
+    <parent link="__jointframe__link_1"/>
+    <child link="link_1"/>
+    <origin xyz="0 -0 0" rpy="1.4488307e-05 1.4960296e-05 1.5469351"/>
+  </joint>
+
+  <link name="__jointframe__meta__base_link_fillable_0_0_link">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="0.01"/>
+      <inertia ixx="1e-4" ixy="0" ixz="0" iyy="1e-4" iyz="0" izz="1e-4"/>
+    </inertial>
+  </link>
+
+  <joint name="meta__base_link_fillable_0_0_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="__jointframe__meta__base_link_fillable_0_0_link"/>
+    <origin xyz="0 0 0" rpy="1.1920929e-07 -0 0"/>
+  </joint>
+
+  <joint name="meta__base_link_fillable_0_0_link__visual_frame_fix" type="fixed">
+    <parent link="__jointframe__meta__base_link_fillable_0_0_link"/>
+    <child link="meta__base_link_fillable_0_0_link"/>
+    <origin xyz="-0 -0 -0" rpy="-1.1920929e-07 -0 0"/>
+  </joint>
+
+  <link name="__jointframe__meta__base_link_openfillable_0_0_link">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="0.01"/>
+      <inertia ixx="1e-4" ixy="0" ixz="0" iyy="1e-4" iyz="0" izz="1e-4"/>
+    </inertial>
+  </link>
+
+  <joint name="meta__base_link_openfillable_0_0_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="__jointframe__meta__base_link_openfillable_0_0_link"/>
+    <origin xyz="0 0 0" rpy="1.1920929e-07 -0 0"/>
+  </joint>
+
+  <joint name="meta__base_link_openfillable_0_0_link__visual_frame_fix" type="fixed">
+    <parent link="__jointframe__meta__base_link_openfillable_0_0_link"/>
+    <child link="meta__base_link_openfillable_0_0_link"/>
+    <origin xyz="-0 -0 -0" rpy="-1.1920929e-07 -0 0"/>
+  </joint>
+</robot>

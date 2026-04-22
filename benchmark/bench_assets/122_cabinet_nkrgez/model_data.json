@@ -1,0 +1,76 @@
+{
+  "scale": [
+    1.0,
+    1.0,
+    1.0
+  ],
+  "transform_matrix": [
+    [
+      1.0,
+      0.0,
+      0.0,
+      0.01795575699948019
+    ],
+    [
+      0.0,
+      1.0,
+      0.0,
+      6.559434814918623e-06
+    ],
+    [
+      0.0,
+      0.0,
+      1.0,
+      0.06709766394149366
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "init_qpos": [
+    0.0,
+    0.0
+  ],
+  "target_points": [],
+  "contact_points": [],
+  "functional_points": [],
+  "orientation_point": [],
+  "contact_points_group": [],
+  "contact_points_mask": [],
+  "target_points_discription": [],
+  "contact_points_discription": [],
+  "functional_points_discription": [],
+  "orientation_point_discription": [],
+  "extents": [
+    0.20038867950439454,
+    1.2114534301757813,
+    0.8325043029785156
+  ],
+  "openable_joint_ids": [
+    [
+      2,
+      "j_link_0"
+    ],
+    [
+      3,
+      "j_link_1"
+    ]
+  ],
+  "openable_joint_names": [
+    "j_link_0",
+    "j_link_1"
+  ],
+  "link_names": [
+    "base_link",
+    "link_0",
+    "link_1"
+  ],
+  "source": {
+    "category": "top_cabinet",
+    "model": "nkrgez",
+    "metadata_path": "/home/aaron/BEHAVIOR-1K/datasets/behavior-1k-assets/objects/top_cabinet/nkrgez/misc/metadata.json"
+  }
+}
