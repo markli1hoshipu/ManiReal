@@ -4,57 +4,87 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>ManiReal — Install</title>
+<meta name="description" content="Full installation guide for the ManiReal benchmark." />
 <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-<header class="hero" style="padding: 3rem 0 1.5rem;">
+
+<header class="masthead">
   <div class="container">
-    <h1 style="font-size: 2.2rem;">Install</h1>
-    <p class="tagline">Setup steps for the ManiReal benchmark.</p>
-    <div class="links">
-      <a class="btn" href="index.html">Home</a>
-      <a class="btn" href="https://github.com/markli1hoshipu/ManiReal">Code</a>
+    <p class="eyebrow"><span>Appendix A · Installation</span></p>
+    <h1 class="title" style="font-size: clamp(3rem, 9vw, 6.5rem);">Install<span class="amp">.</span></h1>
+    <p class="deck">
+      The long form — six steps from a clean checkout to a first collected episode.
+    </p>
+    <div class="toc">
+      <a href="index.html">← § Home</a>
+      <a href="https://github.com/markli1hoshipu/ManiReal">↗ GitHub</a>
     </div>
   </div>
 </header>
-<main class="container">
 
-  <section>
-    <h2>1. Clone</h2>
+<main>
+
+<section class="section">
+  <div class="container grid">
+    <aside class="section-num">§ 1<br>Clone</aside>
+    <div>
+      <h2 class="section-title">Clone.</h2>
 <pre><code>git clone https://github.com/markli1hoshipu/ManiReal.git
 cd ManiReal</code></pre>
-  </section>
+    </div>
+  </div>
+</section>
 
-  <section>
-    <h2>2. RoboTwin base install</h2>
-    <p>Follow the upstream RoboTwin install guide for the conda environment, CuRobo, and SAPIEN:
-      <a href="https://robotwin-platform.github.io/doc/usage/robotwin-install.html">robotwin-platform.github.io/doc/usage/robotwin-install.html</a>.</p>
-    <p>Use the <code>RoboTwin</code> conda environment for all ManiReal commands.</p>
-  </section>
+<section class="section">
+  <div class="container grid">
+    <aside class="section-num">§ 2<br>Base</aside>
+    <div>
+      <h2 class="section-title">RoboTwin base install.</h2>
+      <p class="body">
+        Follow the upstream RoboTwin setup for the conda environment, CuRobo, and SAPIEN:
+        <a href="https://robotwin-platform.github.io/doc/usage/robotwin-install.html">robotwin-platform.github.io/doc/usage/robotwin-install.html</a>.
+        Use the <code>RoboTwin</code> conda environment for all ManiReal commands.
+      </p>
+    </div>
+  </div>
+</section>
 
-  <section>
-    <h2>3. Assets overlay</h2>
-<pre><code>cp -r benchmark/bench_assets/* customized_robotwin/assets/objects_bench/
+<section class="section">
+  <div class="container grid">
+    <aside class="section-num">§ 3<br>Assets</aside>
+    <div>
+      <h2 class="section-title">Assets overlay.</h2>
+<pre><code>cp -r benchmark/bench_assets/* \
+   customized_robotwin/assets/objects_bench/
+
 cp benchmark/bench_assets/embodiments/aloha-agilex/*.yml \
    customized_robotwin/assets/embodiments/aloha-agilex/</code></pre>
-    <p>Edit <code>customized_robotwin/assets/embodiments/aloha-agilex/curobo_left.yml</code>
-       and <code>curobo_right.yml</code> to point at your local URDF paths.</p>
-  </section>
+      <p class="body">Edit <code>curobo_left.yml</code> and <code>curobo_right.yml</code> under <code>customized_robotwin/assets/embodiments/aloha-agilex/</code> to point at your local URDF paths.</p>
+    </div>
+  </div>
+</section>
 
-  <section>
-    <h2>4. Large mesh</h2>
-    <p>
-      The file <code>aloha-agilex/urdf/aloha_maniskill_sim/meshes/box2_Link.dae</code> (~206 MB) is
-      not tracked in this repository. Fetch it from the upstream Aloha-Agilex release:
-    </p>
-    <pre><code># Place the file at:
-#   customized_robotwin/assets/embodiments/aloha-agilex/urdf/aloha_maniskill_sim/meshes/box2_Link.dae</code></pre>
-  </section>
+<section class="section">
+  <div class="container grid">
+    <aside class="section-num">§ 4<br>Mesh</aside>
+    <div>
+      <h2 class="section-title">Large mesh.</h2>
+      <p class="body">
+        The file <code>aloha-agilex/urdf/aloha_maniskill_sim/meshes/box2_Link.dae</code> (~206&nbsp;MB) is not tracked here. Fetch it from the upstream Aloha-Agilex release and place it at:
+      </p>
+<pre><code>customized_robotwin/assets/embodiments/aloha-agilex/
+  urdf/aloha_maniskill_sim/meshes/box2_Link.dae</code></pre>
+    </div>
+  </div>
+</section>
 
-  <section>
-    <h2>5. CuRobo cache patch</h2>
-    <p>In <code>customized_robotwin/envs/curobo/src/curobo/geom/sdf/world_mesh.py</code>,
-       replace the <code>clear_cache</code> method with:</p>
+<section class="section">
+  <div class="container grid">
+    <aside class="section-num">§ 5<br>CuRobo</aside>
+    <div>
+      <h2 class="section-title">CuRobo cache patch.</h2>
+      <p class="body">In <code>customized_robotwin/envs/curobo/src/curobo/geom/sdf/world_mesh.py</code>, replace the <code>clear_cache</code> method with:</p>
 <pre><code>def clear_cache(self):
     self._wp_mesh_cache = {}
     if self._mesh_tensor_list is not None:
@@ -66,21 +96,34 @@ cp benchmark/bench_assets/embodiments/aloha-agilex/*.yml \
             for j in range(len(self._env_mesh_names)):
                 self._env_mesh_names[i][j] = None
     super().clear_cache()</code></pre>
-  </section>
+    </div>
+  </div>
+</section>
 
-  <section>
-    <h2>6. Verify</h2>
+<section class="section">
+  <div class="container grid">
+    <aside class="section-num">§ 6<br>Verify</aside>
+    <div>
+      <h2 class="section-title">Verify.</h2>
 <pre><code>cd customized_robotwin
 source set_env.sh
 export ROBOTWIN_BENCH_TASK="bench"
-python script/bench_script/visualize_task_scene.py put_mouse_on_pad bench_demo_office_clean --rollout --seed 0</code></pre>
-  </section>
+
+python script/bench_script/visualize_task_scene.py \
+    put_mouse_on_pad bench_demo_office_clean --rollout --seed 0</code></pre>
+      <p class="body">A SAPIEN viewer window should open and play a reference rollout of the task. Once that works, you're ready to collect with any perturbation config.</p>
+    </div>
+  </div>
+</section>
 
 </main>
+
 <footer>
-  <div class="container">
-    <p><a href="index.html">← Back to overview</a></p>
+  <div class="container" style="display: flex; justify-content: space-between; width: 100%;">
+    <span><a href="index.html">← Back to overview</a></span>
+    <span>ManiReal · 2026</span>
   </div>
 </footer>
+
 </body>
 </html>

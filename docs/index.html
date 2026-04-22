@@ -3,159 +3,247 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>ManiReal — Realistic Bimanual Manipulation Benchmark</title>
-<meta name="description" content="A benchmark for bimanual manipulation policies under realistic language, vision, and object perturbations." />
+<title>ManiReal — A Realistic Bimanual Manipulation Benchmark</title>
+<meta name="description" content="ManiReal extends RoboTwin with realistic office, study and kitchen scenes and a systematic language / vision / object perturbation suite for policy robustness evaluation." />
 <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-<header class="hero">
+
+<header class="masthead">
   <div class="container">
-    <h1>ManiReal</h1>
-    <p class="tagline">A realistic bimanual manipulation benchmark with systematic robustness perturbations.</p>
-    <div class="links">
-      <a class="btn" href="https://github.com/markli1hoshipu/ManiReal">Code</a>
-      <a class="btn" href="#perturbations">Perturbations</a>
-      <a class="btn" href="#tasks">Tasks</a>
-      <a class="btn" href="#install">Install</a>
-      <a class="btn" href="#cite">Cite</a>
+    <p class="eyebrow"><span>Vol. 01 · 2026 · a benchmark</span></p>
+    <h1 class="title">Mani<span class="amp">Real</span>.</h1>
+    <p class="deck">
+      A realistic bimanual manipulation benchmark — with a systematic
+      <em>language</em>, <em>vision</em>, and <em>object</em> perturbation
+      suite for measuring policy robustness where it breaks.
+    </p>
+    <div class="toc">
+      <a href="#overview">§ 01 · Overview</a>
+      <a href="#perturbations">§ 02 · Perturbations</a>
+      <a href="#tasks">§ 03 · Tasks</a>
+      <a href="#install">§ 04 · Install</a>
+      <a href="#cite">§ 05 · Cite</a>
+      <a href="https://github.com/markli1hoshipu/ManiReal">↗ GitHub</a>
+    </div>
+    <div class="meta">
+      <span><strong>Scenes</strong>Office · Study · Kitchen</span>
+      <span><strong>Embodiment</strong>Aloha-Agilex</span>
+      <span><strong>Simulator</strong>RoboTwin / SAPIEN</span>
+      <span><strong>Tasks</strong>25+</span>
     </div>
   </div>
 </header>
 
-<main class="container">
+<main>
 
-  <section id="overview">
-    <h2>Overview</h2>
-    <p>
-      ManiReal is built on top of the <a href="https://robotwin-platform.github.io">RoboTwin</a> simulation
-      framework and extends it along two axes: (1) a library of visually realistic office, study, and
-      kitchen scenes, and (2) a systematic perturbation suite that applies controlled noise to the
-      <strong>language</strong> instruction, <strong>vision</strong> observations, and <strong>objects</strong>
-      in the scene — enabling per-axis evaluation of policy robustness.
-    </p>
-    <p>
-      All perturbations are implemented as drop-in YAML configurations. Running the same task with
-      <code>bench_demo_*_clean.yml</code> vs <code>bench_demo_vision.yml</code> produces trajectories from
-      the same success-checker but with visually or semantically shifted observations.
-    </p>
-  </section>
-
-  <section id="perturbations">
-    <h2>Perturbation axes</h2>
-
-    <div class="card">
-      <h3>Language</h3>
-      <p>
-        Per-episode, the natural-language instruction is re-sampled from a curated bank of paraphrases
-        (~8–10 per task, 25 tasks, ~276 strings total). The selected instruction is written into
-        <code>scene_info.json</code> and made available to the policy via the standard instruction API.
+<section class="section" id="overview">
+  <div class="container grid">
+    <aside class="section-num">§ 01<br>Overview</aside>
+    <div>
+      <h2 class="section-title">What is <em>ManiReal</em>?</h2>
+      <p class="lede">
+        <span class="drop">M</span>aniReal is a systematic testbed for
+        measuring how bimanual manipulation policies fail under realistic
+        perturbations. It builds on the RoboTwin simulator and adds
+        richly dressed office, study, and kitchen scenes, along with a
+        clean, per-axis perturbation API.
       </p>
-      <video controls muted loop playsinline preload="metadata" poster="">
-        <source src="videos/language.mp4" type="video/mp4" />
-      </video>
+      <div class="body">
+        <p>
+          Every perturbation is a drop-in YAML. Running
+          <code>put_mouse_on_pad</code> with <code>bench_demo_office_clean</code>
+          vs. <code>bench_demo_vision</code> yields trajectories from the
+          same success-checker, but the policy observes a shifted world —
+          new lighting, motion blur, unseen obstacles, or a paraphrased
+          instruction.
+        </p>
+        <p>
+          The result: a factored view of robustness. Language, vision, and
+          object axes are independent and composable, so a policy that
+          collapses under one can be diagnosed without confounds.
+        </p>
+      </div>
+      <blockquote class="pull">
+        Same success checker. Different world. Find the axis that breaks the policy.
+      </blockquote>
     </div>
+  </div>
+</section>
 
-    <div class="card">
-      <h3>Vision</h3>
-      <p>
-        Three sub-factors, any of which can be toggled independently:
-      </p>
-      <ul>
-        <li><strong>Lighting</strong> — L1 per-channel diffuse tint in <code>U[0.4, 1.8]</code>;
-            L2 spherical direction with <code>θ ∈ U[8°, 82°]</code>, <code>φ ∈ U[0, 2π)</code>;
-            L3 50%-chance specular/shininess rewrite (<code>specular ∈ U[0.3, 6.0]</code>,
-            <code>shininess ∈ U[10, 256]</code>); L4 50% shadow toggle.</li>
-        <li><strong>Blur</strong> — per-episode cycle through five types
-            (<code>motion / gaussian / zoom / fog / glass</code>) at severity 2 (s=0.25), strength-scaled.</li>
-        <li><strong>Pixel shake</strong> — per-frame pixel shift
-            <code>dx, dy ∈ U[-max·strength, +max·strength]</code> via <code>cv2.warpAffine</code>.</li>
-      </ul>
-      <div class="grid-2">
-        <figure>
-          <video controls muted loop playsinline preload="metadata"><source src="videos/vision.mp4" type="video/mp4" /></video>
-          <figcaption>Combined (lighting + blur + shake)</figcaption>
-        </figure>
-        <figure>
-          <video controls muted loop playsinline preload="metadata"><source src="videos/vision_lighting.mp4" type="video/mp4" /></video>
-          <figcaption>Lighting only</figcaption>
-        </figure>
-        <figure>
-          <video controls muted loop playsinline preload="metadata"><source src="videos/vision_blur.mp4" type="video/mp4" /></video>
-          <figcaption>Blur only</figcaption>
-        </figure>
-        <figure>
-          <video controls muted loop playsinline preload="metadata"><source src="videos/vision_shake.mp4" type="video/mp4" /></video>
-          <figcaption>Pixel shake only</figcaption>
-        </figure>
+<section class="section" id="perturbations">
+  <div class="container grid">
+    <aside class="section-num">§ 02<br>Perturbations</aside>
+    <div>
+      <h2 class="section-title">Three <em>axes</em>, independently toggleable.</h2>
+
+      <div class="axis">
+        <aside class="axis-label">
+          Axis I
+          <strong>Language</strong>
+        </aside>
+        <div class="axis-body">
+          <p>
+            On each episode, the natural-language instruction is re-sampled
+            from a curated bank of paraphrases — about 8–10 per task across
+            25 tasks, for ~276 strings in total. The selected instruction
+            is persisted to <code>scene_info.json</code> and exposed to
+            the policy through the standard instruction API.
+          </p>
+          <figure class="figure">
+            <video controls muted loop playsinline preload="metadata">
+              <source src="videos/language.mp4" type="video/mp4" />
+            </video>
+            <figcaption><span class="fignum">Fig. 1</span><span>Language — paraphrased instruction per episode</span></figcaption>
+          </figure>
+        </div>
+      </div>
+
+      <div class="axis">
+        <aside class="axis-label">
+          Axis II
+          <strong>Vision</strong>
+        </aside>
+        <div class="axis-body">
+          <p>Three independently-toggleable sub-factors:</p>
+          <h4>Lighting</h4>
+          <ul>
+            <li><strong>L1</strong> — per-channel diffuse tint in <code>U[0.4, 1.8]</code></li>
+            <li><strong>L2</strong> — spherical light direction, <code>θ ∈ U[8°, 82°]</code>, <code>φ ∈ U[0, 2π)</code></li>
+            <li><strong>L3</strong> — 50% chance specular rewrite, <code>specular ∈ U[0.3, 6.0]</code>, <code>shininess ∈ U[10, 256]</code></li>
+            <li><strong>L4</strong> — 50% shadow toggle</li>
+          </ul>
+          <h4>Blur</h4>
+          <ul>
+            <li>Per-episode cycle through <code>motion / gaussian / zoom / fog / glass</code> at severity 2 (<code>s = 0.25</code>), strength-scaled via YAML</li>
+          </ul>
+          <h4>Pixel shake</h4>
+          <ul>
+            <li>Per-frame pixel shift <code>dx, dy ∈ U[-max·strength, +max·strength]</code> via <code>cv2.warpAffine</code></li>
+          </ul>
+          <div class="plate">
+            <figure class="figure">
+              <video controls muted loop playsinline preload="metadata"><source src="videos/vision.mp4" type="video/mp4" /></video>
+              <figcaption><span class="fignum">Fig. 2a</span><span>Combined</span></figcaption>
+            </figure>
+            <figure class="figure">
+              <video controls muted loop playsinline preload="metadata"><source src="videos/vision_lighting.mp4" type="video/mp4" /></video>
+              <figcaption><span class="fignum">Fig. 2b</span><span>Lighting only</span></figcaption>
+            </figure>
+            <figure class="figure">
+              <video controls muted loop playsinline preload="metadata"><source src="videos/vision_blur.mp4" type="video/mp4" /></video>
+              <figcaption><span class="fignum">Fig. 2c</span><span>Blur only</span></figcaption>
+            </figure>
+            <figure class="figure">
+              <video controls muted loop playsinline preload="metadata"><source src="videos/vision_shake.mp4" type="video/mp4" /></video>
+              <figcaption><span class="fignum">Fig. 2d</span><span>Pixel shake only</span></figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+
+      <div class="axis">
+        <aside class="axis-label">
+          Axis III
+          <strong>Object</strong>
+        </aside>
+        <div class="axis-body">
+          <ul>
+            <li><strong>Target texture swap</strong> — after <code>load_actors</code>, a random PNG from <code>assets/background_texture/seen/</code> is bound as the base color map of the target's render body components.</li>
+            <li><strong>Unseen obstacles</strong> — obstacle sampling switches from <code>objects.&lt;scene&gt;.obstacles</code> to the visually disjoint <code>object_ood.&lt;scene&gt;.obstacles</code> pool; targets stay in the baseline pool so the success checker is preserved.</li>
+            <li><strong>background_plus</strong> — B1+ samples a wall/floor color tint; B2 samples table <code>metallic</code> and <code>roughness</code> from configured ranges.</li>
+          </ul>
+          <figure class="figure">
+            <video controls muted loop playsinline preload="metadata">
+              <source src="videos/object.mp4" type="video/mp4" />
+            </video>
+            <figcaption><span class="fignum">Fig. 3</span><span>Object — textured target, OOD obstacles, tinted background</span></figcaption>
+          </figure>
+        </div>
       </div>
     </div>
+  </div>
+</section>
 
-    <div class="card">
-      <h3>Object</h3>
-      <p>
-        Three sub-factors applied per episode:
-      </p>
-      <ul>
-        <li><strong>Target texture swap</strong> — after <code>load_actors</code>, a random PNG from
-            <code>assets/background_texture/seen/</code> is bound as the base color map of the target
-            object's render body components.</li>
-        <li><strong>Unseen obstacles</strong> — obstacle sampling switches from the
-            <code>objects.&lt;scene&gt;.obstacles</code> pool to a visually-disjoint
-            <code>object_ood.&lt;scene&gt;.obstacles</code> pool (targets remain in the baseline pool so the
-            success checker stays consistent).</li>
-        <li><strong>background_plus</strong> — B1+ samples a wall/floor color tint; B2 samples table
-            <code>metallic</code> and <code>roughness</code> from configured ranges.</li>
-      </ul>
-      <video controls muted loop playsinline preload="metadata">
-        <source src="videos/object.mp4" type="video/mp4" />
-      </video>
+<section class="section" id="tasks">
+  <div class="container grid">
+    <aside class="section-num">§ 03<br>Tasks</aside>
+    <div>
+      <h2 class="section-title">Scenes &amp; <em>representative</em> tasks.</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Scene</th><th>Representative tasks</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="scene-name">Office</span></td>
+              <td><code>put_mouse_on_pad</code>, <code>put_phone_on_holder</code>, <code>put_book_on_book</code>, <code>put_milktea_on_shelf</code>, <code>put_stapler_in_drawer</code>, <code>open_drawer</code>, <code>close_drawer</code></td>
+            </tr>
+            <tr>
+              <td><span class="scene-name">Study</span></td>
+              <td><code>put_book_on_stand</code>, <code>put_pen_in_cup</code></td>
+            </tr>
+            <tr>
+              <td><span class="scene-name">Kitchen (S)</span></td>
+              <td><code>put_dish_in_rack</code>, <code>place_in_sink</code></td>
+            </tr>
+            <tr>
+              <td><span class="scene-name">Kitchen (L)</span></td>
+              <td><code>microwave_heat</code>, <code>fridge_store</code></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p><small>Complete inventory under <code>benchmark/bench_envs/</code>.</small></p>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section id="tasks">
-    <h2>Scenes &amp; tasks</h2>
-    <table>
-      <thead><tr><th>Scene</th><th>Representative tasks</th></tr></thead>
-      <tbody>
-        <tr><td>Office</td><td><code>put_mouse_on_pad</code>, <code>put_phone_on_holder</code>, <code>put_book_on_book</code>, <code>put_milktea_on_shelf</code>, <code>put_stapler_in_drawer</code>, <code>open_drawer</code>, <code>close_drawer</code></td></tr>
-        <tr><td>Study</td><td><code>put_book_on_stand</code>, <code>put_pen_in_cup</code></td></tr>
-        <tr><td>Kitchen (Small)</td><td><code>put_dish_in_rack</code>, <code>place_in_sink</code></td></tr>
-        <tr><td>Kitchen (Large)</td><td><code>microwave_heat</code>, <code>fridge_store</code></td></tr>
-      </tbody>
-    </table>
-    <p><small>Complete task inventory under <code>benchmark/bench_envs/</code>.</small></p>
-  </section>
-
-  <section id="install">
-    <h2>Install &amp; run</h2>
+<section class="section" id="install">
+  <div class="container grid">
+    <aside class="section-num">§ 04<br>Install</aside>
+    <div>
+      <h2 class="section-title">Get running in <em>six</em> commands.</h2>
 <pre><code>git clone https://github.com/markli1hoshipu/ManiReal.git
 cd ManiReal
-# Follow: https://robotwin-platform.github.io/doc/usage/robotwin-install.html
+# follow: robotwin-platform.github.io/doc/usage/robotwin-install.html
+
 cd customized_robotwin
 source set_env.sh
 export ROBOTWIN_BENCH_TASK="bench"
 
-# Collect 3 episodes under a perturbation config:
 bash collect_data.sh put_mouse_on_pad bench_demo_vision 0</code></pre>
-    <p>See <a href="install.html">install.html</a> for the large-mesh fetch step and the CuRobo cache patch.</p>
-  </section>
+      <p>The long form — assets overlay, large-mesh fetch, and the CuRobo cache patch — lives at <a href="install.html">install.html</a>.</p>
+    </div>
+  </div>
+</section>
 
-  <section id="cite">
-    <h2>Citation</h2>
+<section class="section" id="cite">
+  <div class="container grid">
+    <aside class="section-num">§ 05<br>Cite</aside>
+    <div>
+      <h2 class="section-title">If <em>ManiReal</em> is useful to you.</h2>
 <pre><code>@misc{manireal2026,
-  title  = {ManiReal: A Realistic Bimanual Manipulation Benchmark with Language, Vision, and Object Perturbations},
+  title  = {ManiReal: A Realistic Bimanual Manipulation Benchmark
+            with Language, Vision, and Object Perturbations},
   author = {Li, Mark and contributors},
   year   = {2026},
   url    = {https://github.com/markli1hoshipu/ManiReal}
 }</code></pre>
-  </section>
+    </div>
+  </div>
+</section>
 
 </main>
 
 <footer>
-  <div class="container">
-    <p>Built on <a href="https://robotwin-platform.github.io">RoboTwin</a>. MIT License.</p>
+  <div class="container" style="display: flex; justify-content: space-between; width: 100%;">
+    <span>ManiReal · 2026</span>
+    <span>Built atop <a href="https://robotwin-platform.github.io">RoboTwin</a></span>
+    <span><a href="https://github.com/markli1hoshipu/ManiReal">github.com/markli1hoshipu/ManiReal</a></span>
   </div>
 </footer>
+
 </body>
 </html>
