@@ -1,10 +1,10 @@
-# ManiReal
+# RoboPRO
 
-A real-world-styled benchmark for bimanual manipulation with perturbation-based robustness evaluation.
+**P**erturbation-**R**esilient **O**bstacle-awareness — a bimanual manipulation benchmark for policy robustness evaluation.
 
-**Website:** https://markli1hoshipu.github.io/ManiReal/
+**Website:** https://markli1hoshipu.github.io/RoboPRO/
 
-ManiReal extends the RoboTwin simulation framework with:
+RoboPRO extends the RoboTwin simulation framework with:
 - **Realistic scenes** across office, study, kitchen (small & large) domains
 - **Systematic perturbation suite** — Language, Vision, and Object axes for evaluating policy robustness
 - **Aloha-Agilex** bimanual embodiment with CuRobo motion planning
@@ -12,8 +12,8 @@ ManiReal extends the RoboTwin simulation framework with:
 ## Installation
 
 ```bash
-git clone https://github.com/markli1hoshipu/ManiReal.git
-cd ManiReal
+git clone https://github.com/markli1hoshipu/RoboPRO.git
+cd RoboPRO
 ```
 
 Follow the RoboTwin install guide: https://robotwin-platform.github.io/doc/usage/robotwin-install.html

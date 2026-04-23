@@ -3,20 +3,21 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>ManiReal — A Realistic Bimanual Manipulation Benchmark</title>
-<meta name="description" content="ManiReal extends RoboTwin with realistic office, study and kitchen scenes and a systematic language / vision / object perturbation suite for policy robustness evaluation." />
+<title>RoboPRO — Perturbation-Resilient Obstacle-awareness Benchmark</title>
+<meta name="description" content="RoboPRO extends RoboTwin with realistic office, study and kitchen scenes and a systematic language / vision / object perturbation suite for evaluating perturbation-resilient, obstacle-aware bimanual manipulation policies." />
 <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
 <header class="masthead">
   <div class="container">
-    <p class="eyebrow"><span>Vol. 01 · 2026 · a benchmark</span></p>
-    <h1 class="title">Mani<span class="amp">Real</span>.</h1>
+    <p class="eyebrow"><span>Vol. 01 · 2026 · a benchmark for robustness</span></p>
+    <h1 class="title">Robo<span class="amp">PRO</span>.</h1>
     <p class="deck">
-      A realistic bimanual manipulation benchmark — with a systematic
-      <em>language</em>, <em>vision</em>, and <em>object</em> perturbation
-      suite for measuring policy robustness where it breaks.
+      <em>Perturbation-Resilient Obstacle-awareness</em> — a bimanual
+      manipulation benchmark that stress-tests policies across
+      <em>language</em>, <em>vision</em>, and <em>object</em> perturbations,
+      on realistic office, study, and kitchen scenes.
     </p>
     <div class="toc">
       <a href="#overview">§ 01 · Overview</a>
@@ -24,7 +25,7 @@
       <a href="#tasks">§ 03 · Tasks</a>
       <a href="#install">§ 04 · Install</a>
       <a href="#cite">§ 05 · Cite</a>
-      <a href="https://github.com/markli1hoshipu/ManiReal">↗ GitHub</a>
+      <a href="https://github.com/markli1hoshipu/RoboPRO">↗ GitHub</a>
     </div>
     <div class="meta">
       <span><strong>Scenes</strong>Office · Study · Kitchen</span>
@@ -41,13 +42,14 @@
   <div class="container grid">
     <aside class="section-num">§ 01<br>Overview</aside>
     <div>
-      <h2 class="section-title">What is <em>ManiReal</em>?</h2>
+      <h2 class="section-title">What is <em>RoboPRO</em>?</h2>
       <p class="lede">
-        <span class="drop">M</span>aniReal is a systematic testbed for
+        <span class="drop">R</span>oboPRO is a systematic testbed for
         measuring how bimanual manipulation policies fail under realistic
-        perturbations. It builds on the RoboTwin simulator and adds
-        richly dressed office, study, and kitchen scenes, along with a
-        clean, per-axis perturbation API.
+        perturbations — <em>Perturbation-Resilient Obstacle-awareness</em>,
+        by name. It builds on the RoboTwin simulator and adds richly
+        dressed office, study, and kitchen scenes with a clean,
+        per-axis perturbation API.
       </p>
       <div class="body">
         <p>
@@ -205,8 +207,8 @@
     <aside class="section-num">§ 04<br>Install</aside>
     <div>
       <h2 class="section-title">Get running in <em>six</em> commands.</h2>
-<pre><code>git clone https://github.com/markli1hoshipu/ManiReal.git
-cd ManiReal
+<pre><code>git clone https://github.com/markli1hoshipu/RoboPRO.git
+cd RoboPRO
 # follow: robotwin-platform.github.io/doc/usage/robotwin-install.html
 
 cd customized_robotwin
@@ -223,13 +225,14 @@ bash collect_data.sh put_mouse_on_pad bench_demo_vision 0</code></pre>
   <div class="container grid">
     <aside class="section-num">§ 05<br>Cite</aside>
     <div>
-      <h2 class="section-title">If <em>ManiReal</em> is useful to you.</h2>
-<pre><code>@misc{manireal2026,
-  title  = {ManiReal: A Realistic Bimanual Manipulation Benchmark
-            with Language, Vision, and Object Perturbations},
+      <h2 class="section-title">If <em>RoboPRO</em> is useful to you.</h2>
+<pre><code>@misc{robopro2026,
+  title  = {RoboPRO: Perturbation-Resilient Obstacle-awareness — a
+            Bimanual Manipulation Benchmark with Language, Vision,
+            and Object Perturbations},
   author = {Li, Mark and contributors},
   year   = {2026},
-  url    = {https://github.com/markli1hoshipu/ManiReal}
+  url    = {https://github.com/markli1hoshipu/RoboPRO}
 }</code></pre>
     </div>
   </div>
@@ -239,9 +242,9 @@ bash collect_data.sh put_mouse_on_pad bench_demo_vision 0</code></pre>
 
 <footer>
   <div class="container" style="display: flex; justify-content: space-between; width: 100%;">
-    <span>ManiReal · 2026</span>
+    <span>RoboPRO · 2026</span>
     <span>Built atop <a href="https://robotwin-platform.github.io">RoboTwin</a></span>
-    <span><a href="https://github.com/markli1hoshipu/ManiReal">github.com/markli1hoshipu/ManiReal</a></span>
+    <span><a href="https://github.com/markli1hoshipu/RoboPRO">github.com/markli1hoshipu/RoboPRO</a></span>
   </div>
 </footer>
 
