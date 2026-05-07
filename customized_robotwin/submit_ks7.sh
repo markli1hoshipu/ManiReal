@@ -1,6 +1,6 @@
 #!/bin/bash
 set -euo pipefail
-TEMPLATE=/shared_work/meta_scripts/roboreal/study_task.sbatch
+TEMPLATE=scripts/study_task.sbatch
 
 TASKS=(
   move_hamburger_onto_plate_ks

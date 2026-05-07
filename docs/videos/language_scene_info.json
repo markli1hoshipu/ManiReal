@@ -9,7 +9,7 @@
         "info": {},
         "language_perturbation": {
             "instruction": "Set the input device down onto the desk pad.",
-            "bank": "/shared_work/robotwin_bench/benchmark/bench_task_config/instruction_bank.json"
+            "bank": "instruction_bank.json"
         }
     },
     "episode_1": {
@@ -22,7 +22,7 @@
         "info": {},
         "language_perturbation": {
             "instruction": "Put the mouse onto the mouse pad.",
-            "bank": "/shared_work/robotwin_bench/benchmark/bench_task_config/instruction_bank.json"
+            "bank": "instruction_bank.json"
         }
     },
     "episode_2": {
@@ -35,7 +35,7 @@
         "info": {},
         "language_perturbation": {
             "instruction": "Transfer the mouse from its current spot onto the pad.",
-            "bank": "/shared_work/robotwin_bench/benchmark/bench_task_config/instruction_bank.json"
+            "bank": "instruction_bank.json"
         }
     }
 }

@@ -9,7 +9,7 @@ Generate 4 comparison videos for the same task using 4 perturbation configs:
 All runs use the same seed and clutter settings for fair comparison.
 
 USAGE:
-    cd /shared_work/robotwin_bench/customized_robotwin
+    cd customized_robotwin
     source set_env.sh
     export ROBOTWIN_BENCH_TASK=bench
     conda activate RoboTwin

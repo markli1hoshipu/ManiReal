@@ -247,7 +247,7 @@ class Bench_base_task(Base_Task):
     def _apply_l3_specular(self):
         """Apply L3 specular/shininess variation to all actors in the scene.
         Must be called after load_actors. Robotwin-plus reference:
-        /shared_work/Robotwin-plus/envs/_base_task.py:478-492.
+        See _base_task.py:478-492.
         """
         if not getattr(self, "apply_lighting_ablation", False):
             return

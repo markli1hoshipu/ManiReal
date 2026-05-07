@@ -2,7 +2,7 @@
 
 **P**erturbation-**R**esilient **O**bstacle-awareness — a bimanual manipulation benchmark for policy robustness evaluation.
 
-**Website:** https://markli1hoshipu.github.io/RoboPRO/
+**Website:** https://anonymous.4open.science/r/RoboPRO-EDE0
 
 RoboPRO extends the RoboTwin simulation framework with:
 - **Realistic scenes** across office, study, kitchen (small & large) domains
@@ -12,7 +12,7 @@ RoboPRO extends the RoboTwin simulation framework with:
 ## Installation
 
 ```bash
-git clone https://github.com/markli1hoshipu/RoboPRO.git
+git clone https://anonymous.4open.science/r/RoboPRO-EDE0
 cd RoboPRO
 ```
 
